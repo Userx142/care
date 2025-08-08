@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apple Support Warning</title>
+  <style>
+    :root {
+      --apple-bg: linear-gradient(to bottom right, #f9f9fb, #e5e5ea);
+      --popup-bg: #2c2c2e;
+      --popup-border: #48484a;
+      --btn-bg: #ff3b30;
+      --btn-shadow: rgba(255, 59, 48, 0.4);
+      --text-color: #ffffff;
+      --primary-text: #1d1d1f;
+      --box-shadow: rgba(0, 0, 0, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--apple-bg);
+      color: var(--primary-text);
+      min-height: 100vh;
+      padding: 30px;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-size: 32px;
+      font-weight: 600;
+    }
+
+    .support-box {
+      max-width: 680px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 20px 40px var(--box-shadow);
+      text-align: center;
+      border: 1px solid #d1d1d6;
+    }
+
+    .support-box h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .support-box p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    #popup-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 999;
+      display: none;
+    }
+
+    #popup {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0.95);
+      background: var(--popup-bg);
+      color: var(--text-color);
+      width: 95%;
+      max-width: 360px;
+      padding: 24px 20px;
+      border-radius: 18px;
+      text-align: center;
+      z-index: 1000;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      border: 1px solid var(--popup-border);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease-in-out;
+    }
+
+    #popup.active, #popup-overlay.active {
+      display: block;
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      pointer-events: auto;
+    }
+
+    #popup h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    #popup p {
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 10px 0;
+    }
+
+    #popup img.logo {
+      width: 40px;
+      margin-bottom: 12px;
+    }
+
+    #popup button {
+      background-color: var(--btn-bg);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 15px;
+      box-shadow: 0 4px 8px var(--btn-shadow);
+      transition: background 0.3s ease;
+    }
+
+    #popup button:hover {
+      background-color: #e03129;
+    }
+
+    @media (max-width: 500px) {
+      body {
+        padding: 20px;
+      }
+
+      .support-box {
+        padding: 20px;
+      }
+
+      #popup {
+        max-width: 95%;
+        padding: 20px 15px;
+      }
+
+      #popup h2 {
+        font-size: 18px;
+      }
+
+      #popup p {
+        font-size: 13px;
+      }
+
+      #popup img.logo {
+        width: 35px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Apple Support</h1>
+  </header>
+
+  <div class="support-box">
+    <h2>Welcome to Apple Support</h2>
+    <p>If you need assistance with your Apple ID, payments, or device security, we're here to help.</p>
+  </div>
+
+  <div id="popup-overlay"></div>
+
+  <div id="popup">
+    <!-- Apple Logo at top -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo" class="logo" />
+
+    <h2>⚠️ Warning</h2>
+    <p>A payment of <strong>$299.00 USD</strong> was attempted using Apple Pay from an unknown location.</p>
+    <p>If this was not you, please call Apple Support immediately at <strong>+1 805-365-4054</strong>.</p>
+
+    <!-- 📞 Call Now Button -->
+    <a href="tel:+18053654054" style="text-decoration: none;">
+      <button style="background-color: #34c759; margin-top: 5px;">📞 Call Now</button>
+    </a>
+
+    <p>The transaction will be processed in 24 hours unless action is taken.</p>
+    <button onclick="closePopup()">Dismiss</button>
+  </div>
+
+  <script>
+    function closePopup() {
+      document.getElementById('popup').classList.remove('active');
+      document.getElementById('popup-overlay').classList.remove('active');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.getElementById('popup').classList.add('active');
+        document.getElementById('popup-overlay').classList.add('active');
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
